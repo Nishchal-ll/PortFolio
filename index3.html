@@ -11,7 +11,16 @@
     <link rel="stylesheet" href="./style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />   
-  </head>
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js">
+  </script>
+  <script type="text/javascript">
+    (function () {
+      emailjs.init({
+        publicKey: "WBlgRh5jH8SFtj2Ue",
+      });
+    })();
+  </script>
+</head>
 <body>
     <header>
         <nav class="navbar navbar-expand-lg  text-center">
@@ -62,11 +71,53 @@
                 </div>
                 <div class="mb-3 w-50 text-black">
                   <label for="message" class="form-label">Message</label>
-                  <textarea class="form-control" id="message" aria-describedby="emailHelp">
+                  <textarea class=" text-start form-control" id="message" aria-describedby="emailHelp">
                   </textarea>
-                </div>
-                <button class="btn btn-secondary text-start">Submit</button>     
+                </div>    
               </form>
+               <script>
+            function mail() {
+              var templateParams = {
+                to_name: 'Nishchal',
+                from_name: document.getElementById('name').value,
+                message: document.getElementById('message').value,
+                email: document.getElementById('email').value,
+                number: document.getElementById('number').value,
+              };
+
+              emailjs.send('service_ow6o9ef', 'template_ya3b2uh', templateParams)
+            }
+            function reset() {
+              var form = document.getElementById('myForm');
+              form.reset();
+            }
+          </script>
+              <button type="button" id="liveToastBtn" onclick="mail()"
+            class="btn btn-secondary text-start animate__animated animate__slideInLeft">Submit</button>
+          <button onclick="reset()"
+            class="btn btn-secondary text-start animate__animated animate__slideInLeft">Reset</button>
+          <div class="toast-container position-fixed bottom-0 end-0 p-3">
+            <div id="liveToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+              <div class="toast-header">
+                <strong class="me-auto">Thankyou</strong>
+                <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+              </div>
+              <div class="toast-body">
+                Your response has been recorded!!
+              </div>
+            </div>
+          </div>
+          <script>
+            const toastTrigger = document.getElementById('liveToastBtn')
+            const toastLiveExample = document.getElementById('liveToast')
+
+            if (toastTrigger) {
+              const toastBootstrap = bootstrap.Toast.getOrCreateInstance(toastLiveExample)
+              toastTrigger.addEventListener('click', () => {
+                toastBootstrap.show()
+              })
+            }
+          </script>
               </div>
               <div class="map-container col-12 col-md-6">        
                 <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d460.5216831582234!2d85.31867755388832!3d27.650791552469325!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39eb1779642ac047%3A0xaa4ec41d86f88c37!2sKusunti%2C%20Lalitpur%2044700!5e0!3m2!1sen!2snp!4v1724424251257!5m2!1sen!2snp" frameborder="0" allowfullscreen="" loading="lazy" async referrerpolicy="no-referrer-when-downgrade"></iframe>
