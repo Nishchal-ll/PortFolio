@@ -76,6 +76,12 @@ class ProjectResource extends Resource
                         'self-made' => 'Self-Made Project',
                     ])
                     ->required(),
+                Forms\Components\FileUpload::make('image_url')
+                    ->label('Cover Image')
+                    ->image()
+                    ->disk('public')
+                    ->directory('projects')
+                    ->columnSpanFull(),
                 Forms\Components\Textarea::make('description')
                     ->required()
                     ->columnSpanFull(),
@@ -86,6 +92,9 @@ class ProjectResource extends Resource
     {
         return $table
             ->columns([
+                Tables\Columns\ImageColumn::make('image_url')
+                    ->label('Cover')
+                    ->disk('public'),
                 Tables\Columns\TextColumn::make('title')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('category')

@@ -11,8 +11,8 @@
         
         // Format camelCase/PascalCase app name to spaced name if needed (e.g. "NishchalAcharya" -> "Nishchal Acharya")
         $formattedName = preg_replace('/(?<!^)(?=[A-Z])/', ' ', $appName);
-        if (!$formattedName) {
-            $formattedName = $appName;
+        if (!$formattedName || $formattedName === 'Laravel') {
+            $formattedName = 'Nishchal Acharya';
         }
 
         $schema = [
@@ -23,9 +23,9 @@
                     '@id' => $appUrl . '/#person',
                     'name' => $formattedName,
                     'url' => $appUrl,
-                    'image' => $appUrl . '/me1.png',
-                    'jobTitle' => 'Full Stack Developer',
-                    'knowsAbout' => ['Laravel', 'PHP', 'Go', 'Golang', 'React', 'Next.js', 'Python', 'Web Development', 'Software Engineering'],
+                    'image' => $appUrl . '/me1.webp',
+                    'jobTitle' => 'Golang Developer',
+                    'knowsAbout' => ['Golang', 'Go', 'Laravel', 'PHP', 'React', 'Next.js', 'Python', 'Web Development', 'Software Engineering'],
                     'sameAs' => [
                         'https://github.com/Nishchal-ll',
                         'https://www.linkedin.com/in/nishchalacharyaaa/',
@@ -37,7 +37,7 @@
                     '@id' => $appUrl . '/#website',
                     'url' => $appUrl,
                     'name' => $formattedName . ' Portfolio',
-                    'description' => 'Personal Portfolio of ' . $formattedName . ', Full Stack Developer & Software Engineer.',
+                    'description' => 'Personal Portfolio of ' . $formattedName . ', Golang Developer & Software Engineer.',
                     'publisher' => [
                         '@id' => $appUrl . '/#person'
                     ]
@@ -46,9 +46,9 @@
         ];
     @endphp
 
-    <title>{{ $formattedName }} | Full Stack Developer & Software Engineer Portfolio</title>
-    <meta name="description" content="Explore the personal portfolio of {{ $formattedName }}, a Full Stack Developer specializing in crafting modern, high-performance web applications using Laravel, Go, and React.">
-    <meta name="keywords" content="{{ $formattedName }}, Nishchal, Acharya, Full Stack Developer, Software Engineer, Web Developer, Laravel, Go, React, Portfolio, Nepal, Nishchal-ll, Robust Trade, Celtic Trekking, AutoTweet">
+    <title>{{ $formattedName }} - Golang Developer</title>
+    <meta name="description" content="Explore the personal portfolio of {{ $formattedName }}, a Golang Developer specializing in crafting modern, high-performance web applications using Golang, Laravel, and React.">
+    <meta name="keywords" content="{{ $formattedName }}, Nishchal, Acharya, Golang Developer, Go Developer, Software Engineer, Web Developer, Laravel, Go, React, Portfolio, Nepal, Nishchal-ll, Shift Management System, Robust Trade, Celtic Trekking, AutoTweet">
     <meta name="author" content="{{ $formattedName }}">
     <meta name="robots" content="index, follow">
     <link rel="canonical" href="{{ $appUrl }}">
@@ -59,158 +59,49 @@
     </script>
 
     <link rel="icon" type="image/png" href="/me1.png">
-    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Preload Critical LCP Hero Image -->
+    <link rel="preload" href="/images/me.webp" as="image" type="image/webp" fetchpriority="high">
+
+    <!-- Preconnect for external resources -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+
+    <!-- Google Fonts with display=swap -->
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700;800&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-    <style>
-        :root {
-            --bg: #f8fafc;
-            --bg-alt: #ffffff;
-            --surface: #ffffff;
-            --surface-2: #f1f5f9;
-            --surface-3: #e2e8f0;
-            --border: #e2e8f0;
-            --border-bright: #cbd5e1;
-            --fg: #0f172a;
-            --fg-dim: #334155;
-            --muted: #64748b;
-            --accent: #22c55e;
-            --accent-bright: #4ade80;
-            --accent-dim: #16a34a;
-            --accent-glow: rgba(34, 197, 94, 0.08);
-            --warning: #fbbf24;
-            --error: #ef4444;
-            --info: #3b82f6;
-            --purple: #8b5cf6;
-            --shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.05);
-            --grid-color: rgba(148, 163, 184, 0.12);
-        }
+    
+    <!-- Asynchronous Non-blocking FontAwesome -->
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    </noscript>
 
-        * {
-            box-sizing: border-box;
+    <!-- Vite compiled optimized CSS/JS with Tailwind CDN fallback for 100% bulletproof rendering -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        accent: '#22c55e',
+                        'accent-bright': '#4ade80',
+                        'accent-dim': '#16a34a',
+                        'accent-glow': 'rgba(34, 197, 94, 0.08)',
+                        golang: '#00ADD8',
+                        warning: '#fbbf24',
+                        purple: '#8b5cf6',
+                    },
+                    fontFamily: {
+                        mono: ['JetBrains Mono', 'monospace'],
+                        sans: ['Space Grotesk', 'sans-serif'],
+                    }
+                }
+            }
         }
-
-        html {
-            scroll-behavior: smooth;
-        }
-
-        body {
-            margin: 0;
-            background: var(--bg);
-            color: var(--fg);
-            font-family: 'Space Grotesk', system-ui, sans-serif;
-            overflow-x: hidden;
-            min-height: 100vh;
-        }
-
-        /* Accent classes explicitly declared */
-        .text-accent {
-            color: var(--accent) !important;
-        }
-        .bg-accent {
-            background-color: var(--accent) !important;
-        }
-        .bg-accent-glow {
-            background-color: var(--accent-glow) !important;
-        }
-        .border-accent {
-            border-color: var(--accent) !important;
-        }
-        .border-accent-dim {
-            border-color: var(--accent-dim) !important;
-        }
-
-        .mono {
-            font-family: 'JetBrains Mono', monospace;
-        }
-
-        .active-filter {
-            border-color: var(--accent) !important;
-            background-color: var(--accent-glow) !important;
-            color: var(--accent) !important;
-            box-shadow: 0 0 10px rgba(34, 197, 94, 0.15);
-        }
-
-        /* Selection */
-        ::selection {
-            background: var(--accent);
-            color: white;
-        }
-
-        /* Scrollbar */
-        ::-webkit-scrollbar {
-            width: 8px;
-        }
-
-        ::-webkit-scrollbar-track {
-            background: var(--bg-alt);
-        }
-
-        ::-webkit-scrollbar-thumb {
-            background: var(--border-bright);
-            border-radius: 4px;
-        }
-
-        ::-webkit-scrollbar-thumb:hover {
-            background: var(--accent);
-        }
-
-        /* Grid background */
-        .grid-bg {
-            position: fixed;
-            inset: 0;
-            background-image:
-                linear-gradient(var(--grid-color) 1px, transparent 1px),
-                linear-gradient(90deg, var(--grid-color) 1px, transparent 1px);
-            background-size: 28px 28px;
-            pointer-events: none;
-            z-index: 1;
-        }
-
-        /* Matrix canvas */
-        #matrix-bg {
-            position: fixed;
-            inset: 0;
-            pointer-events: none;
-            z-index: 0;
-            opacity: 0.03;
-        }
-
-        /* Nav active class */
-        .nav-active {
-            color: var(--accent) !important;
-            background-color: var(--accent-glow) !important;
-            font-weight: 600;
-        }
-
-        /* Line clamping */
-        .line-clamp-3 {
-            display: -webkit-box;
-            -webkit-line-clamp: 3;
-            -webkit-box-orient: vertical;
-            overflow: hidden;
-        }
-
-        /* Floating motion icons */
-        .floating-container {
-            position: fixed;
-            inset: 0;
-            pointer-events: none;
-            z-index: 1;
-        }
-
-        @keyframes float {
-            0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-6px); }
-        }
-
-        @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(24px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-    </style>
+    </script>
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
+    <link rel="stylesheet" href="/css/app.css">
 </head>
 
 <body>
@@ -218,33 +109,36 @@
     <!-- Background grid -->
     <div class="grid-bg"></div>
 
-    <!-- Matrix rain background -->
-    <canvas id="matrix-bg"></canvas>
-
-    <!-- Floating backdrop decoration elements (Pointer Parallax) -->
-    <div class="floating-container hidden sm:block">
-        <div class="floating-item absolute flex items-center gap-2 rounded-md border border-slate-300/60 bg-white/55 px-3 py-2 font-mono text-xs text-slate-500 shadow-sm backdrop-blur left-[8%] top-[19%]" data-depth="24">
-            <i class="fas fa-terminal text-accent"></i> <span>bash</span>
+    <!-- Static backdrop decoration elements (Linux + Go + Laravel + React commands in green theme, no animation) -->
+    <div class="floating-container fixed inset-0 pointer-events-none hidden sm:block z-[2]">
+        <div class="floating-item absolute flex items-center gap-2 rounded-md border border-emerald-500/20 bg-white/70 px-3 py-1.5 font-mono text-xs text-emerald-800 shadow-xs backdrop-blur left-[8%] top-[19%]">
+            <i class="fas fa-terminal text-accent"></i> <span>bash 5.2</span>
         </div>
-        <div class="floating-item absolute flex items-center gap-2 rounded-md border border-slate-300/60 bg-white/55 px-3 py-2 font-mono text-xs text-slate-500 shadow-sm backdrop-blur right-[10%] top-[24%]" data-depth="-18">
-            <i class="fas fa-microchip text-accent"></i> <span>htop</span>
+        <div class="floating-item absolute flex items-center gap-2 rounded-md border border-emerald-500/25 bg-emerald-50/70 px-3 py-1.5 font-mono text-xs text-emerald-800 shadow-xs backdrop-blur left-[16%] bottom-[18%]">
+            <i class="fas fa-bolt text-accent"></i> <span class="font-bold text-accent-dim">go run main.go</span>
         </div>
-        <div class="floating-item absolute flex items-center gap-2 rounded-md border border-slate-300/60 bg-white/55 px-3 py-2 font-mono text-xs text-slate-500 shadow-sm backdrop-blur left-[12%] bottom-[18%]" data-depth="-14">
-            <i class="fas fa-hdd text-accent"></i> <span>/dev/sda</span>
+        <div class="floating-item absolute flex items-center gap-2 rounded-md border border-emerald-500/20 bg-white/70 px-3 py-1.5 font-mono text-xs text-emerald-800 shadow-xs backdrop-blur right-[10%] top-[24%]">
+            <i class="fas fa-microchip text-accent"></i> <span>htop --tree</span>
         </div>
-        <div class="floating-item absolute flex items-center gap-2 rounded-md border border-slate-300/60 bg-white/55 px-3 py-2 font-mono text-xs text-slate-500 shadow-sm backdrop-blur right-[16%] bottom-[22%]" data-depth="20">
-            <i class="fas fa-terminal text-accent"></i> <span>zsh</span>
+        <div class="floating-item absolute flex items-center gap-2 rounded-md border border-emerald-500/20 bg-emerald-50/70 px-3 py-1.5 font-mono text-xs text-emerald-800 shadow-xs backdrop-blur left-[10%] bottom-[32%]">
+            <i class="fab fa-laravel text-accent"></i> <span>php artisan serve</span>
         </div>
-        <div class="floating-item absolute flex items-center gap-2 rounded-md border border-slate-300/60 bg-white/55 px-3 py-2 font-mono text-xs text-slate-500 shadow-sm backdrop-blur left-[48%] top-[12%]" data-depth="12">
-            <i class="fas fa-code text-accent"></i> <span>0101</span>
+        <div class="floating-item absolute flex items-center gap-2 rounded-md border border-emerald-500/20 bg-white/70 px-3 py-1.5 font-mono text-xs text-emerald-800 shadow-xs backdrop-blur right-[16%] bottom-[22%]">
+            <i class="fab fa-react text-accent"></i> <span>npm run dev</span>
         </div>
-        <div class="floating-item absolute flex items-center gap-2 rounded-md border border-slate-300/60 bg-white/55 px-3 py-2 font-mono text-xs text-slate-500 shadow-sm backdrop-blur right-[34%] bottom-[11%]" data-depth="-10">
-            <i class="fas fa-sliders-h text-accent"></i> <span>config</span>
+        <div class="floating-item absolute flex items-center gap-2 rounded-md border border-emerald-500/20 bg-white/70 px-3 py-1.5 font-mono text-xs text-emerald-800 shadow-xs backdrop-blur left-[48%] top-[12%]">
+            <i class="fas fa-code text-accent"></i> <span>01010011</span>
+        </div>
+        <div class="floating-item absolute flex items-center gap-2 rounded-md border border-emerald-500/20 bg-emerald-50/70 px-3 py-1.5 font-mono text-xs text-emerald-800 shadow-xs backdrop-blur right-[32%] bottom-[12%]">
+            <i class="fab fa-docker text-accent"></i> <span>docker compose up</span>
+        </div>
+        <div class="floating-item absolute flex items-center gap-2 rounded-md border border-emerald-500/20 bg-white/70 px-3 py-1.5 font-mono text-xs text-emerald-800 shadow-xs backdrop-blur right-[24%] top-[14%]">
+            <i class="fas fa-code-branch text-accent"></i> <span>git commit -m "feat"</span>
         </div>
     </div>
 
     <!-- Top system bar -->
-    <div class="fixed top-0 left-0 right-0 z-50 select-none border-b border-border bg-slate-50/95 font-mono text-xs backdrop-blur">
+    <div class="fixed top-0 left-0 right-0 z-50 select-none border-b border-slate-200/80 bg-slate-50/95 font-mono text-xs backdrop-blur">
         <div class="flex min-w-0 items-center justify-between gap-2 px-3 py-1.5 sm:px-4">
             <div class="flex min-w-0 items-center gap-2 text-slate-500 sm:gap-3">
                 <span class="text-accent font-bold text-sm">⬡</span>
@@ -284,19 +178,19 @@
     <!-- Middle floating Navbar -->
     <nav class="fixed top-8 left-0 right-0 z-40 py-2">
         <div class="mx-auto w-full max-w-2xl px-3 sm:px-4">
-            <div class="mx-auto overflow-hidden rounded-xl border border-slate-200 bg-white/90 font-mono shadow-lg backdrop-blur">
+            <div class="mx-auto overflow-hidden rounded-xl border border-slate-200/70 bg-white/90 font-mono shadow-sm backdrop-blur">
                 <div class="flex min-w-0 items-stretch">
-                    <div class="flex min-w-0 flex-1 items-center gap-2 border-r border-slate-200 px-3 py-2.5 text-slate-400 sm:flex-none sm:px-4">
+                    <div class="flex min-w-0 flex-1 items-center gap-2 border-r border-slate-100 px-3 py-2.5 text-slate-400 sm:flex-none sm:px-4">
                         <i class="fas fa-terminal text-accent"></i>
                         <span class="truncate text-xs text-accent">~/portfolio $</span>
                     </div>
-                    <button onclick="switchTab('home')" id="nav-btn-home" class="nav-btn flex-1 border-r border-slate-200 px-2 py-2.5 text-center text-xs transition-colors duration-200 sm:flex-none sm:px-6 sm:text-sm text-slate-500 hover:bg-slate-50 nav-active">
+                    <button onclick="switchTab('home')" id="nav-btn-home" class="nav-btn flex-1 border-r border-slate-100 px-2 py-2.5 text-center text-xs transition-colors duration-200 sm:flex-none sm:px-6 sm:text-sm text-slate-600 hover:bg-slate-50 nav-active outline-none focus:outline-none ring-0 focus:ring-0">
                         Home
                     </button>
-                    <button onclick="switchTab('projects')" id="nav-btn-projects" class="nav-btn flex-1 border-r border-slate-200 px-2 py-2.5 text-center text-xs transition-colors duration-200 sm:flex-none sm:px-6 sm:text-sm text-slate-500 hover:bg-slate-50">
+                    <button onclick="switchTab('projects')" id="nav-btn-projects" class="nav-btn flex-1 border-r border-slate-100 px-2 py-2.5 text-center text-xs transition-colors duration-200 sm:flex-none sm:px-6 sm:text-sm text-slate-600 hover:bg-slate-50 outline-none focus:outline-none ring-0 focus:ring-0">
                         Projects
                     </button>
-                    <button onclick="switchTab('contact')" id="nav-btn-contact" class="nav-btn flex-1 px-2 py-2.5 text-center text-xs transition-colors duration-200 sm:flex-none sm:px-6 sm:text-sm text-slate-500 hover:bg-slate-50">
+                    <button onclick="switchTab('contact')" id="nav-btn-contact" class="nav-btn flex-1 px-2 py-2.5 text-center text-xs transition-colors duration-200 sm:flex-none sm:px-6 sm:text-sm text-slate-600 hover:bg-slate-50 outline-none focus:outline-none ring-0 focus:ring-0">
                         Contact
                     </button>
                 </div>
@@ -310,17 +204,27 @@
         <!-- HOME TAB SECTION -->
         <div id="tab-home" class="tab-section mx-auto flex min-h-screen w-full max-w-7xl items-center px-4 pb-12 pt-32 sm:px-6 md:pt-28 lg:px-8">
             <div class="grid w-full grid-cols-1 items-center gap-8 md:grid-cols-2 lg:gap-16">
-                <!-- Grayscale Photo (No Grayscale, Made Bigger, Placed a bit more up) -->
-                <div class="flex justify-center transition-all duration-1000 transform translate-x-0 opacity-100 -translate-y-8 md:-translate-y-12">
+                <!-- Developer Photo (Optimized with high-priority webp) -->
+                <div class="flex justify-center -translate-y-8 md:-translate-y-12">
                     <div class="relative group w-full max-w-[24rem] sm:max-w-md md:max-w-lg lg:max-w-xl">
-                        <!-- Pure neon blur glow background behind developer picture -->
+                        <!-- Neon blur glow background behind developer picture -->
                         <div class="pointer-events-none absolute inset-x-[-15%] bottom-[3%] top-[5%] -z-10 rounded-full bg-lime-300/40 blur-3xl"></div>
-                        <img src="{{ $aboutMe->image_url ?? '/images/me.jpg' }}" alt="{{ $contactInfo->name ?? 'Nishchal Acharya' }}" loading="lazy" class="relative z-10 mx-auto h-auto w-full object-contain" />
+                        <picture>
+                            <source srcset="/images/me.webp" type="image/webp">
+                            <source srcset="/me1.webp" type="image/webp">
+                            <img src="{{ $aboutMe->image_url ?? '/images/me.jpg' }}" 
+                                 alt="{{ $contactInfo->name ?? 'Nishchal Acharya' }}" 
+                                 fetchpriority="high"
+                                 decoding="async"
+                                 width="480"
+                                 height="480"
+                                 class="relative z-10 mx-auto h-auto w-full object-contain" />
+                        </picture>
                     </div>
                 </div>
 
                 <!-- Terminal -->
-                <div class="transition-all duration-1000 delay-300 transform translate-x-0 opacity-100">
+                <div>
                     <div class="w-full overflow-hidden rounded-xl border border-slate-200 bg-white/95 shadow-xl backdrop-blur">
                         <!-- Chrome bar -->
                         <div class="flex items-center justify-between border-b border-slate-200 bg-slate-100 px-4 py-2.5 select-none font-mono">
@@ -344,7 +248,7 @@
                                 <span class="text-slate-400">:</span>
                                 <span class="text-slate-700">~</span>
                                 <span class="text-slate-700">$ ./init_portfolio.sh&nbsp;</span>
-                                <span class="inline-block w-2 h-[14px] bg-accent align-middle animate-pulse"></span>
+                                <span class="inline-block w-2 h-[14px] bg-accent align-middle"></span>
                             </div>
 
                             <h1 class="text-2xl font-bold leading-tight text-slate-900 sm:text-3xl md:text-4xl">
@@ -352,8 +256,17 @@
                                 <span>"{{ $aboutMe->role ?? 'Full Stack Developer' }}"</span>
                             </h1>
 
-                            <div class="space-y-1.5 border-l-2 border-slate-300 pl-3 text-xs leading-relaxed text-slate-600 sm:text-sm">
-                                <p><span class="text-slate-400">&gt;</span> {{ $aboutMe->line_1 ?? 'Crafting modern web applications using Golang, Laravel and React.' }}</p>
+                            <div class="space-y-2 border-l-2 border-slate-300 pl-3 text-xs leading-relaxed text-slate-600 sm:text-sm">
+                                <p><span class="text-slate-400">&gt;</span> 
+                                    @php
+                                        $rawLine1 = $aboutMe->line_1 ?? 'Crafting modern web applications using Golang, Laravel and React.';
+                                        // Highlight Golang prominently in green bold text, keep Laravel and React as plain text
+                                        $highlightedLine1 = preg_replace_callback('/\b(Golang|Go)\b/i', function($m) {
+                                            return '<span class="text-accent font-extrabold text-[1.2em] tracking-tight">' . e($m[0]) . '</span>';
+                                        }, e($rawLine1));
+                                    @endphp
+                                    {!! $highlightedLine1 !!}
+                                </p>
                                 <p><span class="text-slate-400">&gt;</span> {{ $aboutMe->line_2 ?? 'Focusing on performance, security, and scalable architecture.' }}</p>
                                 <p><span class="text-slate-400">&gt;</span> <span class="text-warning">{{ $aboutMe->line_3 ?? '// Ready to deploy solutions.' }}</span></p>
                             </div>
@@ -364,9 +277,9 @@
                                 </p>
                                 <div class="flex flex-wrap gap-2 sm:gap-3">
                                     @foreach($socialLinks as $index => $link)
-                                    <a href="{{ $link->url }}" target="_blank" class="group flex min-w-0 items-center gap-2 rounded-lg border border-slate-300 bg-white px-3 py-2 text-xs font-semibold text-slate-700 transition-all duration-200 hover:border-accent hover:bg-slate-50 hover:text-accent" style="animation: float 3s ease-in-out infinite {{ $index * 0.2 }}s">
+                                    <a href="{{ $link->url }}" target="_blank" class="group flex min-w-0 items-center gap-2 rounded-lg border border-slate-300 bg-white px-3 py-2 text-xs font-semibold text-slate-700 transition-all duration-200 hover:border-accent hover:bg-slate-50 hover:text-accent">
                                         @if(str_contains(strtolower($link->platform), 'github'))
-                                            <i class="fab fa-github"></i>
+                                             <i class="fab fa-github"></i>
                                             <span>git clone</span>
                                         @elseif(str_contains(strtolower($link->platform), 'instagram'))
                                             <i class="fab fa-instagram"></i>
@@ -441,7 +354,7 @@
             <!-- Project Cards -->
             <div class="mx-auto grid max-w-6xl gap-5 sm:grid-cols-2 lg:grid-cols-3">
                 @foreach ($projects as $index => $project)
-                <div class="project-card overflow-hidden rounded-xl border border-slate-200 bg-white/95 shadow-md backdrop-blur transition-all duration-300 hover:-translate-y-1 hover:shadow-xl font-mono" data-category="{{ $project->category }}" style="animation: fadeInUp 0.6s ease-out {{ $index * 0.08 }}s both">
+                <div class="project-card overflow-hidden rounded-xl border border-slate-200 bg-white/95 shadow-md backdrop-blur transition-all duration-300 hover:-translate-y-1 hover:shadow-xl font-mono" data-category="{{ $project->category }}">
                     <!-- Card chrome bar -->
                     <div class="flex items-center justify-between border-b border-slate-200 bg-slate-50 px-3 py-2 select-none">
                         <div class="flex items-center gap-1.5">
@@ -454,6 +367,16 @@
                             <span>repo_{{ $project->id }}.sh</span>
                         </div>
                     </div>
+
+                    @if($project->cover_image_url)
+                    <div class="relative w-full h-44 overflow-hidden border-b border-slate-200 bg-slate-100">
+                        <img src="{{ $project->cover_image_url }}" 
+                             alt="{{ $project->title }} cover" 
+                             class="w-full h-full object-cover object-center" 
+                             loading="lazy" />
+                    </div>
+                    @endif
+
                     <!-- Body -->
                     <div class="p-4 space-y-3">
                         <div>
@@ -465,7 +388,14 @@
                             </h3>
                         </div>
                         <p class="line-clamp-3 border-l-2 border-slate-200 pl-2 text-xs leading-relaxed text-slate-500">
-                            {{ $project->description }}
+                            @php
+                                $desc = e($project->description);
+                                // Highlight Golang / Go in description
+                                $desc = preg_replace_callback('/\b(Go\s*\(Golang\)|Golang|Go)\b/i', function($m) {
+                                    return '<span class="font-bold text-[#007D9C]">' . $m[0] . '</span>';
+                                }, $desc);
+                            @endphp
+                            {!! $desc !!}
                         </p>
                         <div>
                             <p class="mb-1.5 text-xs text-slate-400">
@@ -474,9 +404,16 @@
                             <div class="flex flex-wrap gap-1.5">
                                 @if(is_array($project->technologies))
                                     @foreach($project->technologies as $tech)
-                                    <span class="rounded border border-accent/20 bg-accent-glow px-2 py-0.5 text-xs font-medium text-accent">
-                                        {{ $tech }}
-                                    </span>
+                                        @if(in_array(strtolower($tech), ['go', 'golang']))
+                                            <span class="inline-flex items-center gap-1 rounded border border-[#00ADD8]/40 bg-[#00ADD8]/15 px-2 py-0.5 text-xs font-bold text-[#007D9C] shadow-xs">
+                                                <i class="fas fa-bolt text-[10px] text-[#00ADD8]"></i>
+                                                {{ $tech }}
+                                            </span>
+                                        @else
+                                            <span class="rounded border border-accent/20 bg-accent-glow px-2 py-0.5 text-xs font-medium text-accent">
+                                                {{ $tech }}
+                                            </span>
+                                        @endif
                                     @endforeach
                                 @endif
                             </div>
@@ -549,7 +486,7 @@
                         </p>
                         <div class="flex flex-wrap gap-2 sm:gap-3">
                             @foreach($socialLinks as $index => $link)
-                            <a href="{{ $link->url }}" target="_blank" class="group flex items-center gap-2 rounded-lg border border-slate-300 bg-white px-4 py-2 text-xs font-semibold text-slate-700 transition-all duration-200 hover:border-accent hover:bg-slate-50 hover:text-accent" style="animation: float 3s ease-in-out infinite {{ $index * 0.2 }}s">
+                            <a href="{{ $link->url }}" target="_blank" class="group flex items-center gap-2 rounded-lg border border-slate-300 bg-white px-4 py-2 text-xs font-semibold text-slate-700 transition-all duration-200 hover:border-accent hover:bg-slate-50 hover:text-accent">
                                 @if(str_contains(strtolower($link->platform), 'github'))
                                     <i class="fab fa-github"></i>
                                     <span>git clone</span>
@@ -588,19 +525,22 @@
 
     <script>
         // ===== Clock =====
+        const clockDateEl = document.getElementById('clock-date');
+        const clockTimeEl = document.getElementById('clock-time');
+        const days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+        const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+        
         function updateClock() {
             const now = new Date();
-            const days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
-            const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-            const day = days[now.getDay()];
-            const month = months[now.getMonth()];
-            const date = now.getDate();
-            const h = now.getHours().toString().padStart(2, '0');
-            const m = now.getMinutes().toString().padStart(2, '0');
-            const s = now.getSeconds().toString().padStart(2, '0');
-            
-            document.getElementById('clock-date').textContent = `${day}, ${month} ${date}`;
-            document.getElementById('clock-time').textContent = `${h}:${m}:${s}`;
+            if (clockDateEl) {
+                clockDateEl.textContent = `${days[now.getDay()]}, ${months[now.getMonth()]} ${now.getDate()}`;
+            }
+            if (clockTimeEl) {
+                const h = now.getHours().toString().padStart(2, '0');
+                const m = now.getMinutes().toString().padStart(2, '0');
+                const s = now.getSeconds().toString().padStart(2, '0');
+                clockTimeEl.textContent = `${h}:${m}:${s}`;
+            }
         }
         updateClock();
         setInterval(updateClock, 1000);
@@ -608,78 +548,35 @@
         // ===== Tab Switcher =====
         function switchTab(tabId) {
             document.querySelectorAll('.tab-section').forEach(sec => sec.classList.add('hidden'));
-            document.getElementById('tab-' + tabId).classList.remove('hidden');
+            const targetSection = document.getElementById('tab-' + tabId);
+            if (targetSection) {
+                targetSection.classList.remove('hidden');
+            }
 
             document.querySelectorAll('.nav-btn').forEach(btn => {
                 btn.classList.remove('nav-active');
             });
-            document.getElementById('nav-btn-' + tabId).classList.add('nav-active');
+            const activeBtn = document.getElementById('nav-btn-' + tabId);
+            if (activeBtn) {
+                activeBtn.classList.add('nav-active');
+            }
         }
 
         // ===== Projects Filter =====
         function filterProjects(category) {
-            // Update active state of filter buttons
             document.querySelectorAll('.filter-btn').forEach(btn => {
                 btn.classList.remove('active-filter');
             });
-            document.getElementById('btn-filter-' + category).classList.add('active-filter');
+            const activeFilterBtn = document.getElementById('btn-filter-' + category);
+            if (activeFilterBtn) {
+                activeFilterBtn.classList.add('active-filter');
+            }
 
-            // Hide/Show cards
             document.querySelectorAll('.project-card').forEach(card => {
                 const cardCat = card.getAttribute('data-category');
-                if (category === 'all' || cardCat === category) {
-                    card.style.display = '';
-                } else {
-                    card.style.display = 'none';
-                }
+                card.style.display = (category === 'all' || cardCat === category) ? '' : 'none';
             });
         }
-
-        // ===== Pointer Move Parallax =====
-        window.addEventListener('pointermove', (event) => {
-            const x = (event.clientX / window.innerWidth - 0.5) * 2;
-            const y = (event.clientY / window.innerHeight - 0.5) * 2;
-
-            // Floating icons Parallax
-            document.querySelectorAll('.floating-item').forEach(item => {
-                const depth = parseFloat(item.getAttribute('data-depth'));
-                item.style.transform = `translate3d(${x * depth}px, ${y * depth}px, 0)`;
-                item.style.transition = 'transform 140ms ease-out';
-            });
-        });
-
-        // ===== Matrix Rain Animation =====
-        const canvas = document.getElementById('matrix-bg');
-        const ctx = canvas.getContext('2d');
-        let cols, drops;
-        const chars = '01アイウエオカキクケコサシスセソタチツテトナニヌネノ{}[]<>/$;:./\\|*+-=&%#@!?'.split('');
-
-        function resizeCanvas() {
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
-            cols = Math.floor(canvas.width / 14);
-            drops = Array(cols).fill(0).map(() => Math.random() * canvas.height / 14);
-        }
-        resizeCanvas();
-        window.addEventListener('resize', resizeCanvas);
-
-        function drawMatrix() {
-            ctx.fillStyle = 'rgba(248, 250, 252, 0.05)';
-            ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-            ctx.fillStyle = 'rgba(22, 163, 74, 0.06)';
-            ctx.font = '13px JetBrains Mono';
-
-            for (let i = 0; i < drops.length; i++) {
-                const char = chars[Math.floor(Math.random() * chars.length)];
-                ctx.fillText(char, i * 14, drops[i] * 14);
-                if (drops[i] * 14 > canvas.height && Math.random() > 0.975) {
-                    drops[i] = 0;
-                }
-                drops[i]++;
-            }
-        }
-        setInterval(drawMatrix, 50);
     </script>
 </body>
 
