@@ -46,12 +46,26 @@
         ];
     @endphp
 
-    <title>{{ $formattedName }} - Golang Developer</title>
-    <meta name="description" content="Explore the personal portfolio of {{ $formattedName }}, a Golang Developer specializing in crafting modern, high-performance web applications using Golang, Laravel, and React.">
-    <meta name="keywords" content="{{ $formattedName }}, Nishchal, Acharya, Golang Developer, Go Developer, Software Engineer, Web Developer, Laravel, Go, React, Portfolio, Nepal, Nishchal-ll, Shift Management System, Robust Trade, Celtic Trekking, AutoTweet">
+    <title>{{ $formattedName }} - Golang Developer &amp; Software Engineer</title>
+    <meta name="description" content="Explore the portfolio of {{ $formattedName }}, a Golang Developer and Software Engineer specializing in building scalable backend systems, high-performance microservices, Go, Laravel, and React.">
+    <meta name="keywords" content="{{ $formattedName }}, Nishchal, Acharya, Golang Developer, Go Developer, Software Engineer, Backend Developer, Web Developer, Laravel, Go, React, Portfolio, Nepal, Nishchal-ll">
     <meta name="author" content="{{ $formattedName }}">
-    <meta name="robots" content="index, follow">
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
     <link rel="canonical" href="{{ $appUrl }}">
+
+    <!-- Open Graph / Facebook / LinkedIn / Discord -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="{{ $appUrl }}">
+    <meta property="og:title" content="{{ $formattedName }} - Golang Developer &amp; Software Engineer">
+    <meta property="og:description" content="Explore the portfolio of {{ $formattedName }}, a Golang Developer and Software Engineer specializing in building scalable backend systems, high-performance microservices, Go, Laravel, and React.">
+    <meta property="og:image" content="{{ $appUrl }}/me1.webp">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="{{ $appUrl }}">
+    <meta name="twitter:title" content="{{ $formattedName }} - Golang Developer &amp; Software Engineer">
+    <meta name="twitter:description" content="Explore the portfolio of {{ $formattedName }}, a Golang Developer and Software Engineer specializing in building scalable backend systems, high-performance microservices, Go, Laravel, and React.">
+    <meta name="twitter:image" content="{{ $appUrl }}/me1.webp">
 
     <!-- JSON-LD Structured Data Schema Markup -->
     <script type="application/ld+json">

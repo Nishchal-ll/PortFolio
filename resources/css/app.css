@@ -1,9 +1,153 @@
 @import 'tailwindcss';
 
+@source '../views';
 @source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
 @source '../../storage/framework/views/*.php';
 
-@theme {
-    --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
-        'Segoe UI Symbol', 'Noto Color Emoji';
+:root {
+    --bg: #f8fafc;
+    --bg-alt: #ffffff;
+    --surface: #ffffff;
+    --surface-2: #f1f5f9;
+    --surface-3: #e2e8f0;
+    --border: #e2e8f0;
+    --border-bright: #cbd5e1;
+    --fg: #0f172a;
+    --fg-dim: #334155;
+    --muted: #64748b;
+    --accent: #22c55e;
+    --accent-bright: #4ade80;
+    --accent-dim: #16a34a;
+    --accent-glow: rgba(34, 197, 94, 0.08);
+    --warning: #fbbf24;
+    --error: #ef4444;
+    --info: #3b82f6;
+    --purple: #8b5cf6;
+    --golang: #00ADD8;
+    --shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.05);
+    --grid-color: rgba(148, 163, 184, 0.12);
 }
+
+* {
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--fg);
+    font-family: 'Space Grotesk', system-ui, -apple-system, sans-serif;
+    overflow-x: hidden;
+    min-height: 100vh;
+}
+
+button, .nav-btn, .filter-btn {
+    outline: none !important;
+}
+
+button:focus, button:focus-visible, .nav-btn:focus, .nav-btn:focus-visible, .filter-btn:focus, .filter-btn:focus-visible {
+    outline: none !important;
+    box-shadow: none;
+}
+
+/* Accent & Golang classes explicitly declared */
+.text-accent {
+    color: var(--accent) !important;
+}
+.bg-accent {
+    background-color: var(--accent) !important;
+}
+.bg-accent-glow {
+    background-color: var(--accent-glow) !important;
+}
+.border-accent {
+    border-color: var(--accent) !important;
+}
+.border-accent-dim {
+    border-color: var(--accent-dim) !important;
+}
+
+.text-golang {
+    color: var(--golang) !important;
+}
+.border-golang {
+    border-color: rgba(0, 173, 216, 0.4) !important;
+}
+.bg-golang-glow {
+    background-color: rgba(0, 173, 216, 0.1) !important;
+}
+
+.mono {
+    font-family: 'JetBrains Mono', monospace;
+}
+
+.active-filter {
+    border-color: var(--accent) !important;
+    background-color: var(--accent-glow) !important;
+    color: var(--accent) !important;
+    box-shadow: 0 0 10px rgba(34, 197, 94, 0.15);
+}
+
+/* Selection */
+::selection {
+    background: var(--accent);
+    color: white;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--bg-alt);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--border-bright);
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--accent);
+}
+
+/* Grid background */
+.grid-bg {
+    position: fixed;
+    inset: 0;
+    background-image:
+        linear-gradient(var(--grid-color) 1px, transparent 1px),
+        linear-gradient(90deg, var(--grid-color) 1px, transparent 1px);
+    background-size: 28px 28px;
+    pointer-events: none;
+    z-index: 1;
+}
+
+/* Floating backdrop container */
+.floating-container {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 2;
+}
+
+/* Nav active class */
+.nav-active {
+    color: var(--accent) !important;
+    background-color: var(--accent-glow) !important;
+    font-weight: 600;
+}
+
+/* Line clamping */
+.line-clamp-3 {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
